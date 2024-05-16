@@ -1,4 +1,5 @@
 Rails.application.routes.draw do
+  devise_for :users
   root "articles#index"
   # Define your application routes per the DSL in https://guides.rubyonrails.org/routing.html
 
@@ -6,6 +7,9 @@ Rails.application.routes.draw do
   # Can be used by load balancers and uptime monitors to verify that the app is live.
   resources :articles do
     resources :comments
+    member do 
+      post 'report', to: "articles#report"
+    end
   end
 
   # Defines the root path route ("/")
